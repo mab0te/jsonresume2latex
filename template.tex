@@ -1,0 +1,129 @@
+\documentclass[11pt,a4paper,sans]{moderncv}        
+
+% moderncv themes
+\moderncvstyle{{%- if theme -%}
+${{theme}}
+{%- else -%}
+casual
+{%- endif -%}}                             
+\moderncvcolor{{%- if color -%}
+  ${{color}}
+{%- else -%}
+blue
+{%- endif -%}
+}                               
+
+% adjust the page margins
+\usepackage[scale={%if margin %}${{margin}}{% else %}0.75{% endif %}]{geometry}
+
+% personal data
+\name{${{basics.name}}}{}
+\title{${{basics.label}}}                               
+{% if basics.location %}
+  \address{${{basics.location.address}}}{}{${{basics.location.countryCode}}}
+{% endif %}
+{% if basics.phone %}
+  \phone[mobile]{${{basics.phone}}}                   
+{% endif %}
+{% if basics.email %}
+  \email{${{basic.email}}}                               
+{% endif %}
+{% if basics.website %}
+  \homepage{${{basics.website}}}                         
+{% endif %}
+{% for profile in basics.profiles %}
+  \social[${{profile.network|lower}}]{${{profile.username}}}                        
+{% endfor %}
+
+{% if picture %}
+\photo[64pt][0pt]{${{picture}}}                       
+{% endif %}
+{% if basics.summary %}
+  \quote{${{basics.summary}}}                                 
+{% endif %}
+
+\renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}
+
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+%\begin{CJK*}{UTF8}{gbsn}                          
+%-----       resume       ---------------------------------------------------------
+\makecvtitle
+
+\section{Experience}
+{% for experience in work %}
+\cventry{${{experience.startDate}}--{%if not experience.endDate or experience.endDate == ""%}Now{%else%}${{experience.endDate}}{%endif%}}{${{experience.position}}}{${{experience.company}}}{}{}{${{experience.summary}}\newline{}
+{%- if experience.highlights -%}
+Highlights:
+\begin{itemize}
+{% for highlight in experience.highlights -%}
+\item ${{highlight}}
+{% endfor -%}
+\end{itemize}
+{%- endif %}
+}
+{% endfor %}
+
+\section{Education}
+{% for eduentry in education %}
+\cventry{${{eduentry.startDate}}--${{eduentry.endDate}}}{${{eduentry.studyType}}}{${{eduentry.institution}}}{}{}{${{eduentry.area}}}  
+{% endfor %}
+
+{% if publications %}
+\section{Publications}
+{% for publication in publications %}
+\cventry{${{publication.releaseDate}}}{${{publication.name}}}{${{publication.publisher}}}{}{}{}
+{% endfor %}
+{% endif %}
+
+{% if talks %}
+\section{Talks}
+{% for talk in talks %}
+\cventry{${{talk.event}}}{${{talk.name}}}{}{}{}{${{talk.summary}}}
+{% endfor %}
+{% endif %}
+
+{% if vulns %}
+\section{Vulnerabilities}
+{% for vuln in vulns %}
+\cventry{}{${{vuln.name}}}{}{}{}{${{vuln.summary}}}
+{% endfor %}
+{% endif %}
+
+{% if languages -%}
+\section{Languages}
+{% for language in languages -%}
+\cvitemwithcomment{${{language.language}}}{${{language.fluency}}}{}
+{% endfor -%}
+{% endif %}
+
+{% if skills -%} 
+\section{Skills}
+{% for skill in skills -%}
+{% if loop.index0 % 2 == 0 -%}
+{% if loop.last -%}
+\cvitem{${{skill.name}}}{
+  {%- for keyword in skill.keywords -%}
+    ${{keyword}}{% if not loop.last %}, {% endif %}
+  {%- endfor -%}
+}
+{% else -%}
+\cvdoubleitem{${{skill.name}}}{
+  {%- for keyword in skill.keywords -%}
+    ${{keyword}}{% if not loop.last %}, {% endif %}
+  {%- endfor -%}
+}{${{loop.nextitem.name}}}{
+  {%- for keyword in loop.nextitem.keywords -%}
+    ${{keyword}}{% if not loop.last %}, {% endif %}
+  {%- endfor -%}
+}
+{% endif -%}
+{% endif -%}
+{% endfor -%}
+{% endif %}
+
+\end{document}
+
+%
