@@ -34,7 +34,6 @@ def sanitize_deep(o: object):
     elif isinstance(o, str):
         return latex_escape(o)
     else:
-        print(f"{o}: returned as is")
         return o
 
 args = parser.parse_args()
@@ -48,7 +47,6 @@ cv_data["color"] = args.color
 cv_data["theme"] = args.theme
 
 cv_data = sanitize_deep(cv_data)
-print(cv_data)
 
 for publication in cv_data["publications"]:
     if "website" in publication:
