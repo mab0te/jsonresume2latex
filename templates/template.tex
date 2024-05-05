@@ -66,11 +66,6 @@ Highlights:
 }
 {% endfor %}
 
-\section{Education}
-{% for eduentry in education %}
-\cventry{${{eduentry.startDate}}--${{eduentry.endDate}}}{${{eduentry.studyType}}}{${{eduentry.institution}}}{}{}{${{eduentry.area}}}  
-{% endfor %}
-
 {% if publications %}
 \section{Publications}
 {% for publication in publications %}
@@ -91,6 +86,11 @@ Highlights:
 \cventry{}{${{vuln.name}}}{}{}{}{${{vuln.summary}}}
 {% endfor %}
 {% endif %}
+
+\section{Education}
+{% for eduentry in education %}
+\cventry{${{eduentry.startDate}}--${{eduentry.endDate}}}{${{eduentry.studyType}}}{${{eduentry.institution}}}{}{}{${{eduentry.area}}}  
+{% endfor %}
 
 {% if languages -%}
 \section{Languages}
