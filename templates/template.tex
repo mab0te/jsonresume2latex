@@ -87,18 +87,6 @@ Highlights:
 {% endfor %}
 {% endif %}
 
-\section{Education}
-{% for eduentry in education %}
-\cventry{${{eduentry.startDate}}--${{eduentry.endDate}}}{${{eduentry.studyType}}}{${{eduentry.institution}}}{}{}{${{eduentry.area}}}  
-{% endfor %}
-
-{% if languages -%}
-\section{Languages}
-{% for language in languages -%}
-\cvitemwithcomment{${{language.language}}}{${{language.fluency}}}{}
-{% endfor -%}
-{% endif %}
-
 {% if skills -%} 
 \section{Skills}
 {% for skill in skills -%}
@@ -123,6 +111,19 @@ Highlights:
 {% endif -%}
 {% endfor -%}
 {% endif %}
+
+\section{Education}
+{% for eduentry in education %}
+\cventry{${{eduentry.startDate}}--${{eduentry.endDate}}}{${{eduentry.studyType}}}{${{eduentry.institution}}}{}{}{${{eduentry.area}}}  
+{% endfor %}
+
+{% if languages -%}
+\section{Languages}
+{% for language in languages -%}
+\cvitemwithcomment{${{language.language}}}{${{language.fluency}}}{}
+{% endfor -%}
+{% endif %}
+
 
 \end{document}
 
